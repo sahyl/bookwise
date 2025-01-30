@@ -23,9 +23,9 @@ import {
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
 import { FIELD_NAMES, FIELD_TYPES } from "@/constants";
-import ImageUpload from "./ImageUpload";
 import { toast } from "@/hooks/use-toast";
 import { useRouter } from "next/navigation";
+import FileUpload from "./FileUpload";
 
 interface Props<T extends FieldValues> {
   schema: ZodType<T>;
@@ -40,14 +40,12 @@ const AuthForm = <T extends FieldValues>({
   defaultValues,
   onSubmit,
 }: Props<T>) => {
-  const router = useRouter()
+  const router = useRouter();
   const isSignIn = type === "SIGN_IN";
   const form: UseFormReturn<T> = useForm({
     resolver: zodResolver(schema),
     defaultValues: defaultValues as DefaultValues<T>,
   });
-
-
 
   const handleSubmit: SubmitHandler<T> = async (data) => {
     const result = await onSubmit(data);
@@ -58,12 +56,12 @@ const AuthForm = <T extends FieldValues>({
           ? "You have successfully signed in"
           : "You have successfully signed up",
       });
-      router.push("/")
-    }else{
+      router.push("/");
+    } else {
       toast({
         title: `Error ${isSignIn ? "signing in" : "signing up"}`,
         description: result.error,
-        variant:"destructive",
+        variant: "destructive",
       });
     }
   };
@@ -96,7 +94,14 @@ const AuthForm = <T extends FieldValues>({
                   </FormLabel>
                   <FormControl>
                     {field.name === "universityCard" ? (
-                      <ImageUpload onFileChange={field.onChange} />
+                      <FileUpload
+                        onFileChange={field.onChange}
+                        type="image"
+                        accept="image/*"
+                        placeholder="Upload your university card"
+                        folder="ids"
+                        variant="dark"
+                      />
                     ) : (
                       <Input
                         required
