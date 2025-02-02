@@ -8,6 +8,20 @@
       "when": 1737381748334,
       "tag": "0000_whole_warhawk",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1738335782831,
+      "tag": "0001_redundant_plazm",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1738405979099,
+      "tag": "0002_dusty_electro",
+      "breakpoints": true
     }
   ]
 }

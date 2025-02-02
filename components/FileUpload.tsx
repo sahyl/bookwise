@@ -45,6 +45,7 @@ interface Props {
   placeholder: string;
   folder: string;
   variant: "dark" | "light";
+  value?:string
 }
 
 const FileUpload = ({
@@ -54,9 +55,10 @@ const FileUpload = ({
   accept,
   placeholder,
   variant,
+  value,
 }: Props) => {
   const ikUploadRef = useRef(null);
-  const [file, setFile] = useState<{ filePath: string } | null>(null);
+  const [file, setFile] = useState<{ filePath: string } | null>({filePath:value ?? null});
   const [progress, setProgress] = useState(0);
 
   const styles = {
@@ -146,7 +148,7 @@ const FileUpload = ({
           className="object-contain"
         />
         <p className={cn("text-base", styles.placeholder)}>{placeholder}</p>
-        {file && (<p className={cn("upload-filename", styles.text)}>{file.filePath}</p>)}
+        {/* {file && (<p className={cn("upload-filename", styles.text)}>{file.filePath}</p>)} */}
 
         {/* {file && <p className="upload-filename">{file.filePath}</p>} */}
       </Button>
